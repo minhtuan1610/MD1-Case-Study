@@ -1,6 +1,7 @@
 let arrBoard = []; /* Use for creating game board */
 let cell = []; /* Variable used for creating the value of cells*/
 let countCell23 = 0; /*Variable used for count the amount of the 2- or 3-value cell to check win condition*/
+let boomNumber = 6; /*So luong boom trong board. At level 1, so luong boom bang 6*/
 
 //Create a game board
 function creatBoardInfo() {
@@ -100,6 +101,21 @@ function getBoomCol(j) {
     return countBoom;
 }
 
+//Random vi tri cua boom trong bang
+function setBoomLocation() {
+    let a = boomNumber;
+    //xet vi tri random cua Row
+    for (let i = 0; i < boomNumber; i++) {
+        let a = Math.floor(Math.random() * 5);
+        let b = Math.floor(Math.random() * 5);
+        if (cell[a][b] != 0) {
+            cell[a][b] = 0;
+        }
+        console.log(cell[a][b]);
+    }
+    boomNumber = a;
+}
+
 //Create the value of cell.
 //Set the value of each cell
 function setCellValue(i, j) {
@@ -183,29 +199,14 @@ function checkWin() {
 
 //Restart game
 function restartGame() {
-
+    creatBoardInfo();
+    creatArrayCellValue();
+    drawBoard();
 }
 
-//Game level
-let boomNumber = 6;
-
-function setBoomLocation() {
-    let a = boomNumber;
-    //xet vi tri random cua Row
-    for (let i = 0; i < boomNumber; i++) {
-        let a = Math.floor(Math.random() * 5);
-        let b = Math.floor(Math.random() * 5);
-        if (cell[a][b] != 0) {
-            cell[a][b] = 0;
-        } else {
-            boomNumber++;
-        }
-    }
-    boomNumber = a;
-}
-
-
-function levelUpGame() {
+//Game level when the game at lvl
+function gameLevel() {
     boomNumber++;
     setBoomLocation();
+    drawBoard();
 }
