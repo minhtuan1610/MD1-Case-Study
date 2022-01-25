@@ -1,3 +1,1 @@
-creatBoardInfo();
-creatArrayCellValue();
-drawBoard();
+startGame();
