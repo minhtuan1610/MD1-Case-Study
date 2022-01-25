@@ -41,7 +41,7 @@ let cell = [];
 let countCell23 = 0;
 
 //Set the sum of cells in rows or columns
-function setSumCellRow(x) {
+function getSumCellRow(x) {
     let cnt = 0;
     for (let i = 0; i < 5; i++) {
         cnt += cell[x][i];
@@ -49,7 +49,7 @@ function setSumCellRow(x) {
     return cnt;
 }
 
-function setSumCellCol(x) {
+function getSumCellCol(x) {
     let cnt = 0;
     for (let i = 0; i < 5; i++) {
         cnt += cell[i][x];
@@ -58,37 +58,40 @@ function setSumCellCol(x) {
 }
 
 //Set the sum of booms in rows and columns
-function setBoomRow(x) {
-    let boom = 0;
-    for (let i = 0; i < 5; i++) {
-        if (cell[x][i] == 0) {
-            boom++;
+function getBoomRow(i) {
+    let countBoom = 0;
+    for (let j = 0; j < 5; j++) {
+        if (cell[i][j] == 0) {
+            countBoom++;
         }
     }
-    return boom;
+    return countBoom;
 }
 
-function setBoomCol(x) {
-    let boom = 0;
+function getBoomCol(j) {
+    let countBoom = 0;
     for (let i = 0; i < 5; i++) {
-        if (cell[i][x] == 0) {
-            boom++;
+        if (cell[i][j] == 0) {
+            countBoom++;
         }
     }
-    return boom;
+    return countBoom;
 }
 
+//
+
+//Show the sum of the cells, the sum of boom in the hint row/column
 function displayRowSum(x) {
     let displayRow = "";
     let idRow = "h" + x + 5;
-    displayRow += setSumCellRow(x) + "<br>" + setBoomRow(x);
+    displayRow += getSumCellRow(x) + "<br>" + getBoomRow(x);
     document.getElementById(idRow).innerHTML = displayRow;
 }
 
 function displayColSum(x) {
     let displayCol = "";
     let idCol = "h" + 5 + x;
-    displayCol += setSumCellCol(x) + "<br>" + setBoomCol(x);
+    displayCol += getSumCellCol(x) + "<br>" + getBoomCol(x);
     document.getElementById(idCol).innerHTML = displayCol;
 }
 
@@ -110,7 +113,9 @@ function creatArrayCellValue() {
     for (let i = 0; i < 5; i++) {
         cell[i] = [];
         for (let j = 0; j < 5; j++) {
-            setCellValue(i, j);
+            if (cell[i][j] != 0) {
+                setCellValue(i, j);
+            }
         }
     }
 }
@@ -173,5 +178,35 @@ function checkWin() {
     if (countCell23 == N) {
         alert("Congratulation! You WIN!!!");
         revealBoard();
+
     }
+}
+
+//Restart game
+function restartGame() {
+
+}
+
+//Level-up game
+let boomNumber = 6;
+
+function setBoomLocation() {
+    let a = boomNumber;
+    //xet vi tri random cua Row
+    for (let i = 0; i < boomNumber; i++) {
+        let a = Math.floor(Math.random() * 5);
+        let b = Math.floor(Math.random() * 5);
+        if (cell[a][b] != 0) {
+            cell[a][b] = 0;
+        } else {
+            boomNumber++;
+        }
+    }
+    boomNumber = a;
+}
+
+
+function levelUpGame() {
+    boomNumber++;
+    setBoomLocation();
 }
