@@ -1,6 +1,8 @@
-//Create a game board
-let arrBoard = [];
+let arrBoard = []; /* Use for creating game board */
+let cell = []; /* Variable used for creating the value of cells*/
+let countCell23 = 0; /*Variable used for count the amount of the 2- or 3-value cell to check win condition*/
 
+//Create a game board
 function creatBoardInfo() {
     for (let i = 0; i < 5; i++) {
         arrBoard[i] = [];
@@ -36,10 +38,30 @@ function drawBoard() {
     hintBoard();
 }
 
-//Create the sum of cells and the sum of booms
-let cell = [];
-let countCell23 = 0;
+//Hint Board. It will show the total booms and the total value of the cells (safe-spots).
+function hintBoard() {
+    for (let i = 0; i < 5; i++) {
+        displayRowSum(i);
+        displayColSum(i);
+    }
+}
 
+//Show the sum of the cells, the sum of boom in the hint row/column
+function displayRowSum(x) {
+    let displayRow = "";
+    let idRow = "h" + x + 5;
+    displayRow += getSumCellRow(x) + "<br>" + getBoomRow(x);
+    document.getElementById(idRow).innerHTML = displayRow;
+}
+
+function displayColSum(x) {
+    let displayCol = "";
+    let idCol = "h" + 5 + x;
+    displayCol += getSumCellCol(x) + "<br>" + getBoomCol(x);
+    document.getElementById(idCol).innerHTML = displayCol;
+}
+
+//Create the sum of cells and the sum of booms
 //Set the sum of cells in rows or columns
 function getSumCellRow(x) {
     let cnt = 0;
@@ -78,31 +100,8 @@ function getBoomCol(j) {
     return countBoom;
 }
 
-//
-
-//Show the sum of the cells, the sum of boom in the hint row/column
-function displayRowSum(x) {
-    let displayRow = "";
-    let idRow = "h" + x + 5;
-    displayRow += getSumCellRow(x) + "<br>" + getBoomRow(x);
-    document.getElementById(idRow).innerHTML = displayRow;
-}
-
-function displayColSum(x) {
-    let displayCol = "";
-    let idCol = "h" + 5 + x;
-    displayCol += getSumCellCol(x) + "<br>" + getBoomCol(x);
-    document.getElementById(idCol).innerHTML = displayCol;
-}
-
-function hintBoard() {
-    for (let i = 0; i < 5; i++) {
-        displayRowSum(i);
-        displayColSum(i);
-    }
-}
-
-//Set the value of cell
+//Create the value of cell.
+//Set the value of each cell
 function setCellValue(i, j) {
     let data = Math.floor(Math.random() * 4);
     cell[i][j] = data;
@@ -132,6 +131,7 @@ function reveal(i, j) {
     drawBoard();
 }
 
+//Check condition (Win or Lose)
 //Lose or continue? You will lose if you flip a 0-value cell.
 function checkValue(i, j) {
     if (cell[i][j] == 0) {
@@ -155,7 +155,7 @@ function revealBoard() {
     drawBoard();
 }
 
-//Check win condition
+//Check victory condition?
 //Count the amount of the 2- and 3-value cell.
 function amountCell23() {
     let cnt = 0;
@@ -172,13 +172,12 @@ function amountCell23() {
     return cnt;
 }
 
-//You will win if you uncover all the 2- or 3-value cells.
+//Win condition: all the 2- or 3-value cells are uncovered.
 function checkWin() {
     const N = amountCell23();
     if (countCell23 == N) {
         alert("Congratulation! You WIN!!!");
         revealBoard();
-
     }
 }
 
@@ -187,7 +186,7 @@ function restartGame() {
 
 }
 
-//Level-up game
+//Game level
 let boomNumber = 6;
 
 function setBoomLocation() {
