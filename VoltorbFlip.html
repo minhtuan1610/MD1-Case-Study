@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Voltorb Flip</title>
@@ -14,8 +14,10 @@
 <div id="gameBoard"></div>
 <div>
     <button id="restartGame" onclick="restartGame()">Restart</button>
-    <button id="customLevel" onclick="selectLevel()">Custom Level</button>
+    <button id="customLevel" onclick="selectLevel()">Custom level</button>
+    <button id="currentLevel" onclick="playAtSameLevel()">Restart current level</button>
 </div>
+<div id="level"></div>
 <div>
     <h4>Hướng dẫn chơi</h4>
     <p>Voltorb Flip là một trò chơi dò mìn kiểu mới. Bàn chơi có kích thước 5x5, với các con số bị ẩn đi. Người chơi

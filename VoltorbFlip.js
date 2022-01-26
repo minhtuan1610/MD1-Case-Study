@@ -1,8 +1,9 @@
 let arrBoard = []; /* Use for creating game board */
 let cell = []; /* Variable used for creating the value of cells*/
 let countCell23 = 0; /*Variable used for count the amount of the 2- or 3-value cell to check win condition*/
-let boomNumber = 6; /*So luong boom trong board. At level 1, so luong boom bang 6*/
+let boomNumber = 6; /*The total booms in game-board at level 1.*/
 let level = [6, 7, 8, 9, 10];
+let cntLevel = 0;
 
 //Create a game board
 function creatBoardInfo() {
@@ -206,21 +207,49 @@ function startGame() {
     creatArrayCellValue();
     setBoomLocation();
     drawBoard();
+    displayLevel();
+}
+
+//Show the current level
+function displayLevel() {
+    document.getElementById("level").innerText = "Level: " + (cntLevel + 1);
 }
 
 //Raise the level of the game board
 function selectLevel() {
-    if (boomNumber < level[level.length - 1]) {
-        boomNumber++;
-        startGame();
-    } else {
-        boomNumber = level[0];
-        startGame();
+    let ctx = prompt("Nhập số tương ứng từ 1-5 để chọn level mong muốn. Nhập 0 để thoát");
+    let temp = cntLevel;
+    cntLevel = parseInt(ctx) - 1;
+    switch (cntLevel) {
+        case -1:
+            cntLevel = temp;
+            break;
+        case 0: /*corresponding to the index of array Level*/
+        case 1: /*corresponding to the index of array Level*/
+        case 2: /*corresponding to the index of array Level*/
+        case 3: /*corresponding to the index of array Level*/
+        case 4: /*corresponding to the index of array Level*/
+            boomNumber = level[cntLevel];
+            startGame();
+            displayLevel();
+            break;
+        default:
+            alert("Có mỗi việc nhập mà cũng sai. Nhập lại đi -.-");
+            selectLevel();
     }
+    console.log(boomNumber);
+}
+
+//Play again at the current level
+function playAtSameLevel() {
+    boomNumber;
+    startGame();
     console.log(boomNumber);
 }
 
 //Restart game
 function restartGame() {
+    cntLevel = 0;
     startGame();
+    console.log(boomNumber);
 }
