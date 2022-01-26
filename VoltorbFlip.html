@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <title>Voltorb Flip</title>
     <link href="VoltorbFlip.css" rel="stylesheet">
-
-
 </head>
 <body>
 <div>
     <h1>Voltorb Flip</h1>
 </div>
 <div id="gameBoard"></div>
-<div>
+<div id="level"></div>
+<div class="button">
     <button id="restartGame" onclick="restartGame()">Restart</button>
     <button id="customLevel" onclick="selectLevel()">Custom level</button>
     <button id="currentLevel" onclick="playAtSameLevel()">Restart current level</button>
 </div>
-<div id="level"></div>
-<div>
+
+<div class="guide">
     <h4>Hướng dẫn chơi</h4>
     <p>Voltorb Flip là một trò chơi dò mìn kiểu mới. Bàn chơi có kích thước 5x5, với các con số bị ẩn đi. Người chơi
        sẽ lật để khám phá các con số ẩn sau đó. Mỗi ô sẽ có giá trị ngẫu nhiên từ 0 đến 3. Trò chơi sẽ kết thúc một
@@ -32,7 +31,6 @@
     <ul>
         <li>Ô có giá trị 0 được lật.</li>
     </ul>
-
 </div>
 <script src="VoltorbFlip.js"></script>
 <script src="VoltorbFlipOperation.js"></script>

@@ -1,6 +1,50 @@
+table {
+    border-spacing: 10px;
+}
+
 td {
     border: 1px solid black;
     height: 40px;
     width: 40px;
     text-align: center;
+    background-color: #66bb33;
+}
+
+div#gameBoard {
+    background-color: #ccff9a;
+    border: 2px solid #333;
+    float: left;
+    margin-right: 20px;
+    padding: 5px;
+}
+
+td.hintBoard {
+    background-color: #DED;
+    cursor: default;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+div.guide {
+    clear: both;
+}
+
+div.button {
+    clear: both;
+    padding-top: 10px;
+}
+
+div#level {
+    font-size: 30px;
+}
+
+td.hintBoard em {
+    color: #014f86;
+    font-style: normal;
+}
+
+td.hintBoard strong {
+    color: #E00;
 }

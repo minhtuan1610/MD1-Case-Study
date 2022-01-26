@@ -24,14 +24,14 @@ function drawBoard() {
             board += arrBoard[i][j];
             board += "</td>";
         }
-        board += "<td>";
+        board += "<td class='hintBoard''>";
         board += "<div id='h" + i + 5 + "'>" + "</div>";
         board += "</td>";
         board += "</tr>";
     }
     board += "<tr>";
     for (let i = 0; i < 5; i++) {
-        board += "<td>";
+        board += "<td class='hintBoard'>";
         board += "<div id='h" + 5 + i + "'>" + "</div>";
         board += "</td>";
     }
@@ -53,14 +53,14 @@ function hintBoard() {
 function displayRowSum(x) {
     let displayRow = "";
     let idRow = "h" + x + 5;
-    displayRow += getSumCellRow(x) + "<br>" + getBoomRow(x);
+    displayRow += "<em>" + getSumCellRow(x) + "</em>" + "<br>" + "<strong>" + getBoomRow(x) + "</strong>";
     document.getElementById(idRow).innerHTML = displayRow;
 }
 
 function displayColSum(x) {
     let displayCol = "";
     let idCol = "h" + 5 + x;
-    displayCol += getSumCellCol(x) + "<br>" + getBoomCol(x);
+    displayCol += "<em>" + getSumCellCol(x) + "</em>" + "<br>" + "<strong>" + getBoomCol(x) + "</strong>";
     document.getElementById(idCol).innerHTML = displayCol;
 }
 
